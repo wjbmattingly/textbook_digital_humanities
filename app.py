@@ -2,7 +2,7 @@ import streamlit as st
 import glob
 import locale
 
-locale.setlocale(locale.LC_ALL, 'en_US')
+# locale.setlocale(locale.LC_ALL, 'en_US')
 
 st.title("Digital Humanities Apps")
 
@@ -24,7 +24,7 @@ if type == "Generate Text":
             file = file.read().decode().split(chapter_format)
             all_text = "\n\n".join(file)
             words = len(all_text.split())
-            words = locale.format("%d", words, grouping=True)
+            # words = locale.format("%d", words, grouping=True)
             st.write(f'Your text is {words} words long.')
             output = st.text_area("Output", all_text)
 
@@ -45,7 +45,7 @@ if type == "Generate Text":
             final.append(temp)
         all_text = "\n\n".join(final)
         words = len(all_text.split())
-        words = locale.format("%d", words, grouping=True)
+        # words = locale.format("%d", words, grouping=True)
         st.write(f'Your text is {words} words long.')
         output = st.text_area("Output", all_text)
 
