@@ -1,5 +1,4 @@
 import streamlit as st
-import fasttext
 import glob
 import locale
 

@@ -1,0 +1,5 @@
+spacy
+keybert
+sklearn
+numpy
+gensim
