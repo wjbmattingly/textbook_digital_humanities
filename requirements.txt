@@ -3,3 +3,4 @@ keybert
 sklearn
 numpy
 gensim
+summa
