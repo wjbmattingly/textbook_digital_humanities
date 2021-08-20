@@ -128,13 +128,13 @@ if type == "Natural Language Processing (NLP)":
                 st.write(model)
 
 
-                word_vecs = model[search]
+                word_vecs = model.wv[search]
                 col1, col2 = st.columns(2)
                 col1.header("Word Vector Shape")
                 col1.write(str(word_vecs))
 
                 col2.header("Most Similar Words")
-                results = model.most_similar(search)
+                results = model.wv.most_similar(search)
                 for x in results:
                     col2.write (x)
         else:
