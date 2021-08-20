@@ -5,3 +5,5 @@ numpy
 gensim
 summa
 spacy-streamlit
+sentence_transformers
+pandas
