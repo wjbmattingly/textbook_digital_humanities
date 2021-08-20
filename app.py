@@ -184,6 +184,8 @@ if type == "Natural Language Processing (NLP)":
                 json.dump(data, f, indent=4)
 
         st.title("TRC Volume 7 - Sentence Embedding Search Engine")
+        st.write("This page may take a few seconds to load...")
+        st.write("Here, you will be able to engage in a machine learning method known as sentence embeddings. Like word embeddings, sentence embeddings are numerical representations of text. Unlike word embeddings, the embedding occurs not at the word-level, rather at the sentence level. This means that each sentence's semantic and syntactic value is given in a vector. With this vector we can calculate not word similarity, rather sentence similarity. This means that we can run searches on entire sentences (or paragraphs), rather than key words. Try it out. Find a description you want to match and this search engine will use that description's vetor and compare it to all other known descriptions in the database (around 22,000). It will then return the top-10 matches based on similarity. In the sidebar type the number that corresponds to your desired search.")
         res_container = st.expander("Results")
         df = cache_df()
         paraphrases = cache_paras()
