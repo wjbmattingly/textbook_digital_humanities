@@ -6,7 +6,7 @@ st.image("header.png")
 
 
 type = st.sidebar.selectbox("Select Page",
-        ("Home", "Generate Text", "Natural Language Processing (NLP)", "Images"))
+        ("Home", "Generate Text", "Natural Language Processing (NLP)", "Images", "Key Concepts"))
 
 if type == "Home":
     st.title("Home")
@@ -302,3 +302,13 @@ if type == "Natural Language Processing (NLP)":
                 words = "\n * ".join(words)
                 words = "* "+words
                 st.markdown(words)
+elif type == "Key Concepts":
+    concept_options = st.sidebar.selectbox("Choose a Concept", ("Word Embeddings", "Sentence Embeddings"))
+    if concept_options == "Word Embeddings":
+        with open ("markdown_pages/word_embeddings.md", "r", encoding="utf-8") as f:
+            text = f.read()
+        st.markdown(text)
+    
+
+elif type == "Images":
+    st.write("Page forthcoming...")
