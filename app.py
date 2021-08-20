@@ -1,14 +1,20 @@
 import streamlit as st
 import glob
-import locale
 
-# locale.setlocale(locale.LC_ALL, 'en_US')
-
+st.set_page_config(layout="wide")
 st.image("header.png")
 
 
 type = st.sidebar.selectbox("types",
-        ("Generate Text", "Natural Language Processing (NLP)", "Images"))
+        ("Home", "Generate Text", "Natural Language Processing (NLP)", "Images"))
+
+if type == "Home":
+    st.title("Home")
+    st.write("This app is designed for students of the digital humanities (DH). It allows those students to explore different DH methods and tools for exploring texts and images. The methods range from heuristic, or rules-based, approaches to machine learning (ML).")
+    st.header("Directions")
+    st.write("In this app you can engage in different digital humanities (DH) methods. Under Natural Language Processing (NLP), you can engage in some of the cutting edgee methods for performing NLP with machine learaning (ML), including word embeddings, sentence embeddings, and differeent keyword extraction methods. In Word Embeddings, you will be able to train your own custom word embeddings on your own corpus and then explore the embeddings further.")
+
+
 
 if type == "Generate Text":
     st.write("Choose the method for how you want to separate your files. You can separate things by a known occurence of a word in your individual file, such as a chapter. Another option is to upload multiple files, where each file is a unique item in your corpus.")
