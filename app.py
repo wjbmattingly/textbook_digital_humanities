@@ -12,7 +12,7 @@ if type == "Home":
     st.title("Home")
     st.write("This app is designed for students of the digital humanities (DH). It allows those students to explore different DH methods and tools for exploring texts and images. The methods range from heuristic, or rules-based, approaches to machine learning (ML).")
     st.header("Directions")
-    st.write("In this app you can engage in different digital humanities (DH) methods. Under Natural Language Processing (NLP), you can engage in some of the cutting edgee methods for performing NLP with machine learaning (ML), including word embeddings, sentence embeddings, and differeent keyword extraction methods. In Word Embeddings, you will be able to train your own custom word embeddings on your own corpus and then explore the embeddings further.")
+    st.write("In this app you can engage in different digital humanities (DH) methods. Use the sidebar to navigate the app. Under Natural Language Processing (NLP), you can engage in some of the cutting edge methods for performing NLP with machine learaning (ML), including word embeddings, sentence embeddings, and differeent keyword extraction methods. In Word Embeddings, you will be able to train your own custom word embeddings on your own corpus and then explore the embeddings further.")
 
 
 
