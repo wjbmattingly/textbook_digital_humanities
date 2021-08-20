@@ -4,7 +4,7 @@ import locale
 
 # locale.setlocale(locale.LC_ALL, 'en_US')
 
-st.title("Digital Humanities Apps")
+st.image("header.png")
 
 
 type = st.sidebar.selectbox("types",
