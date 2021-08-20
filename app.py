@@ -51,7 +51,7 @@ if type == "Generate Text":
             final.append(temp)
         all_text = "\n\n".join(final)
         words = len(all_text.split())
-        # words = locale.format("%d", words, grouping=True)
+
         st.write(f'Your text is {words} words long.')
         output = st.text_area("Output", all_text)
 
@@ -101,7 +101,7 @@ if type == "Natural Language Processing (NLP)":
             trigram = Phrases(bigram[tokenized_sentences])
             sentences = list(trigram[tokenized_sentences])
 
-            model = FastText(sentences, size=100, window=20, min_count=10,sg=0)
+            model = FastText(sentences, vector_size=30, window=20, min_count=10,sg=0)
             st.session_state['word2vec'] = model
             st.write("The Word2Vec Model has finished training. You can now use it. Under NLP Options, select 'Word Embeddings - Use Model'. You can see your model's vocabulary down below.")
             vocab_expander = st.expander("Vocabulary")
@@ -185,7 +185,7 @@ if type == "Natural Language Processing (NLP)":
 
         st.title("TRC Volume 7 - Sentence Embedding Search Engine")
         st.write("This page may take a few seconds to load...")
-        st.write("Here, you will be able to engage in a machine learning method known as sentence embeddings. Like word embeddings, sentence embeddings are numerical representations of text. Unlike word embeddings, the embedding occurs not at the word-level, rather at the sentence level. This means that each sentence's semantic and syntactic value is given in a vector. With this vector we can calculate not word similarity, rather sentence similarity. This means that we can run searches on entire sentences (or paragraphs), rather than key words. Try it out. Find a description you want to match and this search engine will use that description's vetor and compare it to all other known descriptions in the database (around 22,000). It will then return the top-10 matches based on similarity. In the sidebar type the number that corresponds to your desired search.")
+        st.write("Here, you will be able to engage in a machine learning method known as sentence embeddings. Like word embeddings, sentence embeddings are numerical representations of text. Unlike word embeddings, the embedding occurs not at the word-level, rather at the sentence level. This means that each sentence's semantic and syntactic value is given in a vector. With this vector we can calculate not word similarity, rather sentence similarity. This means that we can run searches on entire sentences (or paragraphs), rather than key words. Try it out. Find a description you want to match and this search engine will use that description's vetor and compare it to all other known descriptions in the database (around 22,000). It will then return the top-10 matches based on similarity. In the sidebar type the number that corresponds to your desired search. The results will appear in the Results expander below.")
         res_container = st.expander("Results")
         df = cache_df()
         paraphrases = cache_paras()
