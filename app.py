@@ -5,7 +5,7 @@ st.set_page_config(layout="wide")
 st.image("header.png")
 
 
-type = st.sidebar.selectbox("types",
+type = st.sidebar.selectbox("Select Page",
         ("Home", "Generate Text", "Natural Language Processing (NLP)", "Images"))
 
 if type == "Home":
@@ -77,7 +77,7 @@ if type == "Natural Language Processing (NLP)":
         nlp.add_pipe("sentencizer")
         st.write("Word2Vec Analysis")
         word2vec_form = st.form("Word2Vec Form")
-        text = str(word2vec_form.text_input("Insert your text here."))
+        text = str(word2vec_form.text_area("Insert your text here.", height=500))
         text = text.replace("-\n", "\n").replace("\n", " ")
         text = ''.join([i for i in text if not i.isdigit()])
         word2vec_button = word2vec_form.form_submit_button()
