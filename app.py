@@ -6,7 +6,7 @@ st.image("header.png")
 
 
 type = st.sidebar.selectbox("Select Page",
-        ("Home", "Generate Text", "Natural Language Processing (NLP)", "Images", "Key Concepts"))
+        ("Home", "Generate Text", "Natural Language Processing (NLP)", "Key Concepts"))
 
 if type == "Home":
     st.title("Home")
