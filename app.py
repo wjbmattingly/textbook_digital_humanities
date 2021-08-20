@@ -304,11 +304,13 @@ if type == "Natural Language Processing (NLP)":
                 st.markdown(words)
 elif type == "Key Concepts":
     concept_options = st.sidebar.selectbox("Choose a Concept", ("Word Embeddings", "Sentence Embeddings"))
+    word_embedding_file = "markdown_pages/word_embeddings.md"
     if concept_options == "Word Embeddings":
-        with open ("markdown_pages/word_embeddings.md", "r", encoding="utf-8") as f:
-            text = f.read()
-        st.markdown(text)
-    
+        file = word_embedding_file
+    with open (file, "r", encoding="utf-8") as f:
+        text = f.read()
+    st.markdown(text)
+
 
 elif type == "Images":
     st.write("Page forthcoming...")
