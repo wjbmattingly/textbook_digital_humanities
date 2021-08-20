@@ -105,7 +105,7 @@ if type == "Natural Language Processing (NLP)":
             st.session_state['word2vec'] = model
             st.write("The Word2Vec Model has finished training. You can now use it. Under NLP Options, select 'Word Embeddings - Use Model'. You can see your model's vocabulary down below.")
             vocab_expander = st.expander("Vocabulary")
-            vocab = list(model.wv.vocab)
+            vocab = list(model.wv.index_to_key)
             vocab_expander.write(vocab)
 
     elif nlp_options == "Word Embeddings - Use Model":
@@ -115,7 +115,7 @@ if type == "Natural Language Processing (NLP)":
             model = st.session_state["word2vec"]
             #
             vocab_expander = st.expander("Vocabulary")
-            vocab = list(model.wv.vocab)
+            vocab = list(model.wv.index_to_key)
 
             vocab_expander.write(vocab)
             model_form = st.form("Model Form")
