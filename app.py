@@ -1,6 +1,11 @@
 import streamlit as st
 import glob
 
+def read_md(file):
+    with open (file, "r", encoding="utf-8") as f:
+        text = f.read()
+    return (text)
+
 st.set_page_config(layout="wide")
 st.image("header.png")
 
@@ -10,9 +15,10 @@ type = st.sidebar.selectbox("Select Page",
 
 if type == "Home":
     st.title("Home")
-    st.write("This app is designed for students of the digital humanities (DH). It allows those students to explore different DH methods and tools for exploring texts and images. The methods range from heuristic, or rules-based, approaches to machine learning (ML).")
+    st.write(read_md("markdown_pages/home.md"))
+
     st.header("Directions")
-    st.write("In this app you can engage in different digital humanities (DH) methods. Use the sidebar to navigate the app. Under Natural Language Processing (NLP), you can engage in some of the cutting edge methods for performing NLP with machine learaning (ML), including word embeddings, sentence embeddings, and differeent keyword extraction methods. In Word Embeddings, you will be able to train your own custom word embeddings on your own corpus and then explore the embeddings further.")
+    st.write(read_md("markdown_pages/directions.md"))
 
 
 
@@ -67,15 +73,22 @@ if type == "Natural Language Processing (NLP)":
     "Graph-Based Extraction",
     "KeyBERT"))
     if nlp_options == "Word Embeddings - Create Model":
+        st.header("Create Word Embedding Model")
+        create_expander = st.expander("Directions for Creating a Model")
+        create_expander.write(read_md("markdown_pages/create_embedding_model.md"))
+
+
         from gensim.models import Word2Vec, FastText
         from gensim.models.phrases import Phraser, Phrases
         import spacy
         from gensim.parsing.preprocessing import preprocess_documents
         from gensim.utils import tokenize
+
+
         nlp =  spacy.blank("en")
         nlp.max_length = 100000000
         nlp.add_pipe("sentencizer")
-        st.write("Word2Vec Analysis")
+
         word2vec_form = st.form("Word2Vec Form")
         text = str(word2vec_form.text_area("Insert your text here.", height=500))
         text = text.replace("-\n", "\n").replace("\n", " ")

@@ -1,0 +1,1 @@
+This app is designed for students of the digital humanities (DH). It allows those students to explore different DH methods and tools for exploring texts and images. The methods range from heuristic, or rules-based, approaches to machine learning (ML) ones.

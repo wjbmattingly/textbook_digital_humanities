@@ -1,0 +1,3 @@
+On this page of the app, you can create your own word embedding model. To simplify things, this app does not allow you to control the different parameters of the model. To train a model, copy-and-paste a large quantity of text into the field below. Word Embedding models typically need 100,000 minimum words to begin to understand a language even moderately well. I recommend trying to copy-and-paste in around 1 million words, if possible. Once trained, the model will be stored in streamlit
+
+If you need to generate some text, use the app's text generator by selecting multiple files or one large one.
