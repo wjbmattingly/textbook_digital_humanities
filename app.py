@@ -249,7 +249,7 @@ if type == "Natural Language Processing (NLP)":
 
 
     elif nlp_options == "TF-IDF" or nlp_options == "Graph-Based Extraction" or nlp_options == "KeyBERT":
-        st.header("Use Word Embedding Model")
+        st.header("Keyword Extraction")
         create_expander = st.expander("Directions for Using Keyword Extraction")
         create_expander.markdown(read_md("markdown_pages/keyword.md"), unsafe_allow_html=True)
         col1, col2, col3 = st.columns(3)
@@ -315,28 +315,50 @@ if type == "Natural Language Processing (NLP)":
 
         elif nlp_options == "Graph-Based Extraction":
             from summa import keywords
+            all_keywords = []
             for i in range(len(all_text)):
-                st.header(f"These are the Key Terms for Text {i+1}")
-                words = keywords.keywords(all_text[i], words=5).split()
-                words = "\n * ".join(words)
-                words = "* "+words
-                st.markdown(words)
+                all_keywords.append(keywords.keywords(all_text[i], words=5).split())
+            col1.header(f"Key Terms")
+            words = "\n * ".join(all_keywords[0])
+            words = "* "+words
+            col1.markdown(words)
+
+            col2.header(f"Key Terms")
+            words = "\n * ".join(all_keywords[1])
+            words = "* "+words
+            col2.markdown(words)
+
+            col3.header(f"Key Terms")
+            words = "\n * ".join(all_keywords[2])
+            words = "* "+words
+            col3.markdown(words)
 
         elif nlp_options == "KeyBERT":
             from keybert import KeyBERT
             kw_extractor = KeyBERT('distilbert-base-nli-mean-tokens')
-            st.write("Downloaded Model.")
+            all_keywords = []
             for i in range(len(all_text)):
-                st.header(f"These are the Key Terms for Text {i+1}")
                 words = kw_extractor.extract_keywords(all_text[i], keyphrase_ngram_range=(1, 2), stop_words='english')
                 final = []
                 for word in words:
                     new = str(word)
                     final.append(new)
-                words = final
-                words = "\n * ".join(words)
-                words = "* "+words
-                st.markdown(words)
+                all_keywords.append(final)
+
+            col1.header(f"Key Terms")
+            words = "\n * ".join(all_keywords[0])
+            words = "* "+words
+            col1.markdown(words)
+
+            col2.header(f"Key Terms")
+            words = "\n * ".join(all_keywords[1])
+            words = "* "+words
+            col2.markdown(words)
+
+            col3.header(f"Key Terms")
+            words = "\n * ".join(all_keywords[2])
+            words = "* "+words
+            col3.markdown(words)
 elif type == "Key Concepts":
     concept_options = st.sidebar.selectbox("Choose a Concept", ("Word Embeddings", "Sentence Embeddings"))
     word_embedding_file = "markdown_pages/word_embeddings.md"
