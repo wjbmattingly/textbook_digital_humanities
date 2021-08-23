@@ -335,15 +335,29 @@ if type == "Natural Language Processing (NLP)":
 
         elif nlp_options == "KeyBERT":
             from keybert import KeyBERT
+            top_n = container1.slider("Top-N Words", 1,50)
+            n_gram_low = container2.slider("N-Gram Range (Low)", 1, 3)
+            n_gram_high = container3.slider("N-Gram Range (High)", 1, 3)
+
+            stop_words = container1.selectbox("Stopwords", ("english", "german", "spanish"))
+            nr_candidates = container2.slider("Number of Candidates", 1, 50)
+            diversity = container3.slider("Diversity", 0.0, 1.0, 0.7)
+
+
             kw_extractor = KeyBERT('distilbert-base-nli-mean-tokens')
             all_keywords = []
             for i in range(len(all_text)):
-                words = kw_extractor.extract_keywords(all_text[i], keyphrase_ngram_range=(1, 2), stop_words='english')
+                words = kw_extractor.extract_keywords(all_text[i],
+                                keyphrase_ngram_range=(n_gram_low, n_gram_high),
+                                stop_words=stop_words,
+                                top_n=top_n,
+                                nr_candidates=nr_candidates)
                 final = []
                 for word in words:
                     new = str(word)
                     final.append(new)
                 all_keywords.append(final)
+
 
             col1.header(f"Key Terms")
             words = "\n * ".join(all_keywords[0])
