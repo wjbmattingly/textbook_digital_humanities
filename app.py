@@ -122,6 +122,9 @@ if type == "Natural Language Processing (NLP)":
             vocab_expander.write(vocab)
 
     elif nlp_options == "Word Embeddings - Use Model":
+        st.header("Use Word Embedding Model")
+        create_expander = st.expander("Directions for Using a Model")
+        create_expander.write(read_md("markdown_pages/use_embedding_model.md"))
         #https://github.com/AmmarRashed/word_embeddings_hp/blob/master/gensim_vecs.ipynb
         if "word2vec" in st.session_state:
             # model = fasttext.load_model("temp_model.bin")
