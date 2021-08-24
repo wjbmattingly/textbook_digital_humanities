@@ -271,9 +271,9 @@ if type == "Natural Language Processing (NLP)":
             from re import sub
 
 
-            max_features = container1.slider("Max Features", 1, 40)
-            n_gram_low = container2.slider("N-Gram Range (Low)", 1, 3)
-            n_gram_high = container3.slider("N-Gram Range (High)", 1, 3)
+            max_features = container1.slider("Max Features", 1, 100)
+            n_gram_low = container2.slider("N-Gram Range (Low)", 1, 10)
+            n_gram_high = container3.slider("N-Gram Range (High)", 1, 10)
 
             vectorizer = TfidfVectorizer(
                                     lowercase=True,
