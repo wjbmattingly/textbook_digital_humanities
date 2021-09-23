@@ -15,7 +15,10 @@ st.image("header.png")
 
 
 type = st.sidebar.selectbox("Select Page",
-        ("Home", "Generate Text", "Natural Language Processing (NLP)", "Key Concepts"))
+        ("Home",
+        # "Generate Text",
+        "Natural Language Processing (NLP)",
+        "Key Concepts"))
 
 if type == "Home":
     st.title("Home")
@@ -24,57 +27,57 @@ if type == "Home":
     st.header("Directions")
     st.write(read_md("markdown_pages/directions.md"))
 
-
-
-if type == "Generate Text":
-    st.write("Choose the method for how you want to separate your files. You can separate things by a known occurence of a word in your individual file, such as a chapter. Another option is to upload multiple files, where each file is a unique item in your corpus.")
-
-    text_options = st.selectbox("Select Generator", ("Separate File by Chapter", "Upload Multiple Files"))
-
-    if text_options == "Separate File by Chapter":
-        text_options_form = st.form(key="Text Options Form")
-        file = text_options_form.file_uploader("Upload File")
-        chapter_format = text_options_form.text_input("How are chapters formatted, e.g. CHAPTER or Chapter 01? This is case-sensitive.")
-        text_options_form_button = text_options_form.form_submit_button("Submit")
-        if text_options_form_button:
-            file = file.read().decode().split(chapter_format)
-            all_text = "\n\n".join(file)
-            words = len(all_text.split())
-            # words = locale.format("%d", words, grouping=True)
-            st.write(f'Your text is {words} words long.')
-            output = st.text_area("Output", all_text)
-
-
-
-
-
-
-    if text_options == "Upload Multiple Files":
-        st.write("Here select all your text files that you wish to analyze in this app. The output will be long text that has all files separated by double line breaks. You can then copy and paste this file in each of the apps.")
-        files = st.file_uploader("Upload Files", accept_multiple_files=True)
-        final = []
-        for file in files:
-            file = file.read().decode()
-            temp = file.replace("-\n", "").replace("\n", " ")
-            while "  " in temp:
-                temp = temp.replace("  ", " ")
-            final.append(temp)
-        all_text = "\n\n".join(final)
-        words = len(all_text.split())
-
-        st.write(f'Your text is {words} words long.')
-        output = st.text_area("Output", all_text)
-
-model = ""
+#
+#
+# if type == "Generate Text":
+#     st.write("Choose the method for how you want to separate your files. You can separate things by a known occurence of a word in your individual file, such as a chapter. Another option is to upload multiple files, where each file is a unique item in your corpus.")
+#
+#     text_options = st.selectbox("Select Generator", ("Separate File by Chapter", "Upload Multiple Files"))
+#
+#     if text_options == "Separate File by Chapter":
+#         text_options_form = st.form(key="Text Options Form")
+#         file = text_options_form.file_uploader("Upload File")
+#         chapter_format = text_options_form.text_input("How are chapters formatted, e.g. CHAPTER or Chapter 01? This is case-sensitive.")
+#         text_options_form_button = text_options_form.form_submit_button("Submit")
+#         if text_options_form_button:
+#             file = file.read().decode().split(chapter_format)
+#             all_text = "\n\n".join(file)
+#             words = len(all_text.split())
+#             # words = locale.format("%d", words, grouping=True)
+#             st.write(f'Your text is {words} words long.')
+#             output = st.text_area("Output", all_text)
+#
+#
+#
+#
+#
+#
+#     if text_options == "Upload Multiple Files":
+#         st.write("Here select all your text files that you wish to analyze in this app. The output will be long text that has all files separated by double line breaks. You can then copy and paste this file in each of the apps.")
+#         files = st.file_uploader("Upload Files", accept_multiple_files=True)
+#         final = []
+#         for file in files:
+#             file = file.read().decode()
+#             temp = file.replace("-\n", "").replace("\n", " ")
+#             while "  " in temp:
+#                 temp = temp.replace("  ", " ")
+#             final.append(temp)
+#         all_text = "\n\n".join(final)
+#         words = len(all_text.split())
+#
+#         st.write(f'Your text is {words} words long.')
+#         output = st.text_area("Output", all_text)
+#
+# model = ""
 
 if type == "Natural Language Processing (NLP)":
     nlp_options = st.sidebar.selectbox("NLP Options",
     (
     # "Word Embeddings - Create Model",
     # "Word Embeddings - Use Model",
+    "TF-IDF",
     "Sentence Embeddings",
     "Named Entity Recognition (NER)",
-    "TF-IDF",
     "Graph-Based Extraction",
     "KeyBERT"))
     # if nlp_options == "Word Embeddings - Create Model":
