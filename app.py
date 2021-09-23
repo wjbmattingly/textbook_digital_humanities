@@ -6,8 +6,12 @@ def read_md(file):
         text = f.read()
     return (text)
 
-st.set_page_config(layout="wide")
+st.set_page_config(page_title="The Digital Humanities App", layout="wide")
+st.get_option("theme.primaryColor")
+
+
 st.image("header.png")
+
 
 
 type = st.sidebar.selectbox("Select Page",
@@ -65,99 +69,105 @@ model = ""
 
 if type == "Natural Language Processing (NLP)":
     nlp_options = st.sidebar.selectbox("NLP Options",
-    ("Word Embeddings - Create Model",
-    "Word Embeddings - Use Model",
+    (
+    # "Word Embeddings - Create Model",
+    # "Word Embeddings - Use Model",
     "Sentence Embeddings",
     "Named Entity Recognition (NER)",
     "TF-IDF",
     "Graph-Based Extraction",
     "KeyBERT"))
-    if nlp_options == "Word Embeddings - Create Model":
-        st.header("Create Word Embedding Model")
-        create_expander = st.expander("Directions for Creating a Model")
-        create_expander.write(read_md("markdown_pages/create_embedding_model.md"))
+    # if nlp_options == "Word Embeddings - Create Model":
+    #     st.header("Create Word Embedding Model")
+    #     create_expander = st.expander("Directions for Creating a Model")
+    #     create_expander.write(read_md("markdown_pages/create_embedding_model.md"))
+    #
+    #
+    #     from gensim.models import Word2Vec, FastText
+    #     from gensim.models.phrases import Phraser, Phrases
+    #     import spacy
+    #     from gensim.parsing.preprocessing import preprocess_documents
+    #     from gensim.utils import tokenize
+    #
+    #
+    #     nlp =  spacy.blank("en")
+    #     nlp.max_length = 100000000
+    #     nlp.add_pipe("sentencizer")
+    #     # sp = spacy.load('en_core_web_sm')
+    #     all_stopwords = nlp.Defaults.stop_words
+    #     st.write(all_stopwords)
+    #     word2vec_form = st.form("Word2Vec Form")
+    #     text = str(word2vec_form.text_area("Insert your text here.", height=500))
+    #     text = text.replace("-\n", "\n").replace("\n", " ")
+    #     text = ''.join([i for i in text if not i.isdigit()])
+    #     word2vec_button = word2vec_form.form_submit_button()
+    #
+    #     vocab = ""
+    #     if word2vec_button:
+    #
+    #         import string
+    #         sentences  = []
+    #         text = str(text).replace("“", "").replace("“", "")
+    #         doc = nlp(text)
+    #         prepared_texts = []
+    #         for sent in doc.sents:
+    #             text_tokens = [token.text for token in sent if not token.text in all_stopwords]
+    #             sentence = " ".join(text_tokens)
+    #             sentences.append(sentence)
+    #         tokenized_sentences  = [list(tokenize(doc, lower=True)) for doc in sentences]
+    #
+    #         # phrases = Phrases(tokenized_sentences)
+    #
+    #         bigram = Phrases(tokenized_sentences)
+    #         # sentences = list(bigram[tokenized_sentences])
+    #
+    #         trigram = Phrases(bigram[tokenized_sentences])
+    #         sentences = list(trigram[tokenized_sentences])
+    #
+    #         model = FastText(sentences, vector_size=30, window=20, min_count=10,sg=0)
+    #         st.session_state['word2vec'] = model
+    #         st.write("The Word2Vec Model has finished training. You can now use it. Under NLP Options, select 'Word Embeddings - Use Model'. You can see your model's vocabulary down below.")
+    #         vocab_expander = st.expander("Vocabulary")
+    #         vocab = list(model.wv.index_to_key)
+    #         vocab_expander.write(vocab)
 
-
-        from gensim.models import Word2Vec, FastText
-        from gensim.models.phrases import Phraser, Phrases
-        import spacy
-        from gensim.parsing.preprocessing import preprocess_documents
-        from gensim.utils import tokenize
-
-
-        nlp =  spacy.blank("en")
-        nlp.max_length = 100000000
-        nlp.add_pipe("sentencizer")
-
-        word2vec_form = st.form("Word2Vec Form")
-        text = str(word2vec_form.text_area("Insert your text here.", height=500))
-        text = text.replace("-\n", "\n").replace("\n", " ")
-        text = ''.join([i for i in text if not i.isdigit()])
-        word2vec_button = word2vec_form.form_submit_button()
-
-        vocab = ""
-        if word2vec_button:
-            import string
-            sentences  = []
-            text = str(text).replace("“", "").replace("“", "")
-            doc = nlp(text)
-            prepared_texts = []
-            for sent in doc.sents:
-                sentences.append(sent.text)
-            tokenized_sentences  = [list(tokenize(doc, lower=True)) for doc in sentences]
-
-            # phrases = Phrases(tokenized_sentences)
-
-            bigram = Phrases(tokenized_sentences)
-            # sentences = list(bigram[tokenized_sentences])
-
-            trigram = Phrases(bigram[tokenized_sentences])
-            sentences = list(trigram[tokenized_sentences])
-
-            model = FastText(sentences, vector_size=30, window=20, min_count=10,sg=0)
-            st.session_state['word2vec'] = model
-            st.write("The Word2Vec Model has finished training. You can now use it. Under NLP Options, select 'Word Embeddings - Use Model'. You can see your model's vocabulary down below.")
-            vocab_expander = st.expander("Vocabulary")
-            vocab = list(model.wv.index_to_key)
-            vocab_expander.write(vocab)
-
-    elif nlp_options == "Word Embeddings - Use Model":
-        st.header("Use Word Embedding Model")
-        create_expander = st.expander("Directions for Using a Model")
-        create_expander.write(read_md("markdown_pages/use_embedding_model.md"))
-        #https://github.com/AmmarRashed/word_embeddings_hp/blob/master/gensim_vecs.ipynb
-        if "word2vec" in st.session_state:
-            # model = fasttext.load_model("temp_model.bin")
-            model = st.session_state["word2vec"]
-            #
-            vocab_expander = st.expander("Vocabulary")
-            vocab = list(model.wv.index_to_key)
-
-            vocab_expander.write(vocab)
-            model_form = st.form("Model Form")
-            search = model_form.selectbox("Search for a word", vocab)
-            model_submit = model_form.form_submit_button("Run Search")
-
-            if model_submit:
-                search = str(search)
-                st.write(search)
-                st.write(model)
-
-
-                word_vecs = model.wv[search]
-                col1, col2 = st.columns(2)
-                col1.header("Word Vector Shape")
-                col1.write(str(word_vecs))
-
-                col2.header("Most Similar Words")
-                results = model.wv.most_similar(search)
-                for x in results:
-                    col2.write (x)
-        else:
-            st.warning("You must create a model first.")
+    # elif nlp_options == "Word Embeddings - Use Model":
+    #     st.header("Use Word Embedding Model")
+    #     create_expander = st.expander("Directions for Using a Model")
+    #     create_expander.write(read_md("markdown_pages/use_embedding_model.md"))
+    #     #https://github.com/AmmarRashed/word_embeddings_hp/blob/master/gensim_vecs.ipynb
+    #     if "word2vec" in st.session_state:
+    #         # model = fasttext.load_model("temp_model.bin")
+    #         model = st.session_state["word2vec"]
+    #         #
+    #         vocab_expander = st.expander("Vocabulary")
+    #         vocab = list(model.wv.index_to_key)
+    #
+    #         vocab_expander.write(vocab)
+    #         model_form = st.form("Model Form")
+    #         search = model_form.selectbox("Search for a word", vocab)
+    #         model_submit = model_form.form_submit_button("Run Search")
+    #
+    #         if model_submit:
+    #             search = str(search)
+    #             st.write(search)
+    #             st.write(model)
+    #
+    #
+    #             word_vecs = model.wv[search]
+    #             col1, col2 = st.columns(2)
+    #             col1.header("Word Vector Shape")
+    #             col1.write(str(word_vecs))
+    #
+    #             col2.header("Most Similar Words")
+    #             results = model.wv.most_similar(search)
+    #             for x in results:
+    #                 col2.write (x)
+    #     else:
+    #         st.warning("You must create a model first.")
 
 ### SENTENCE EMBEDDINGS###
-    elif nlp_options == "Sentence Embeddings":
+    if nlp_options == "Sentence Embeddings":
         import pandas as pd
         import json
         from sentence_transformers import util
